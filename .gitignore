@@ -1,0 +1,13 @@
+train_data/
+test_data/
+test_data_v2/
+lightning_logs/
+checkpoints/
+cache/
+.lightning_studio
+
+.vscode/
+.vscode-server/
+.idea/this_studio.iml
+__pycache__/
+.wget-hsts
