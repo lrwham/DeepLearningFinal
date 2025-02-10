@@ -3,6 +3,7 @@ import torch
 import lightning as L
 from torchvision.models import resnet50, ResNet50_Weights, resnet18, ResNet18_Weights
 
+
 class ResNetBinaryClassifier(L.LightningModule):
     def __init__(self, learning_rate=None):
         super().__init__()
@@ -70,8 +71,8 @@ class CNN_Binary_Classifier(L.LightningModule):
         # inputs are 512x512 squares
         self.conv1 = nn.Conv2d(3, 16, 3, 1)
         self.conv2 = nn.Conv2d(16, 32, 3, 1)
-        self.conv3 = nn.Conv2d(32, 64, 3, 1)  
-        self.conv4 = nn.Conv2d(64, 128, 3, 1) 
+        self.conv3 = nn.Conv2d(32, 64, 3, 1)
+        self.conv4 = nn.Conv2d(64, 128, 3, 1)
         self.pool = nn.MaxPool2d(2, 2)
         self.fc1 = nn.Linear(128 * 30 * 30, 128)
         self.fc2 = nn.Linear(128, 1)
