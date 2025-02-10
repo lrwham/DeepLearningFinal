@@ -40,8 +40,12 @@ if __name__ == "__main__":
     #     learning_rate=0.001
     # )
     model = ResNetBinaryClassifier(
-        learning_rate=0.1,
+        learning_rate=0.01,
     )
+
+    from lightning.pytorch.callbacks import LearningRateMonitor
+    
+    learning_rate_callback = LearningRateMonitor(logging_interval="step")
     
     # model = torch.compile(model)
     # check out https://lightning.ai/docs/pytorch/stable/advanced/speed.html#speed-amp
@@ -54,7 +58,7 @@ if __name__ == "__main__":
         max_time="00:04:00:00",
         max_epochs=200,
         log_every_n_steps=10,
-        callbacks=[early_stop_callback, checkpoint_callback],
+        callbacks=[early_stop_callback, checkpoint_callback, learning_rate_callback],
         profiler="simple",
     )
 
