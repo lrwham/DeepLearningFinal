@@ -59,7 +59,7 @@ if __name__ == "__main__":
     )
 
     path = "/teamspace/studios/this_studio"
-    datamodule = DataModule(path, fraction=0.2, num_workers=10, batch_size=16, persistent_workers=True)
+    datamodule = DataModule(path, fraction=0.5, num_workers=10, batch_size=64, persistent_workers=True)
 
     print("About to fit! 🎸")
     trainer.fit(model, datamodule=datamodule)

@@ -10,7 +10,7 @@ from ImageDataset import ImageDataset, InferenceImageDataset
 
 
 class DataModule(L.LightningDataModule):
-    def __init__(self, path, batch_size=16, num_workers=11, fraction=1.0, persistent_workers=True):
+    def __init__(self, path, batch_size=16, num_workers=11, fraction=None, persistent_workers=True):
         super().__init__()
         self.path = path
         self.batch_size = batch_size
@@ -24,7 +24,8 @@ class DataModule(L.LightningDataModule):
 
         train_df = pd.read_csv(self.path + "/train.csv")
 
-        train_df = train_df.sample(frac=self.fraction, random_state=99)
+        if self.fraction is not None:
+            train_df = train_df.sample(frac=self.fraction, random_state=99)
 
         predict_df = pd.read_csv(self.path + "/test.csv")
 
