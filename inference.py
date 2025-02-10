@@ -15,8 +15,8 @@ if __name__ == "__main__":
     torch.set_float32_matmul_precision('high')
     path = "/teamspace/studios/this_studio"
     # load the model
-    model = CNN_Binary_Classifier.load_from_checkpoint(
-"checkpoints/2025-02-09-17-44-epoch=09-val_loss=0.13.ckpt"    )
+    model = ResNetBinaryClassifier.load_from_checkpoint(
+"checkpoints/2025-02-10-18-12-epoch=60-val_loss=0.09.ckpt"    )
 
     # use CPU
     trainer = L.Trainer(accelerator="gpu", devices=1)

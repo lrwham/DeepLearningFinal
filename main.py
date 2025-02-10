@@ -17,7 +17,7 @@ if __name__ == "__main__":
     from lightning.pytorch.callbacks.early_stopping import EarlyStopping
 
     early_stop_callback = EarlyStopping(
-        monitor="val_loss", min_delta=0.00, patience=10, verbose=False, mode="min"
+        monitor="val_loss", min_delta=0.00, patience=15, verbose=False, mode="min"
     )
 
     from lightning.pytorch.callbacks import ModelCheckpoint
