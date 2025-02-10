@@ -7,7 +7,7 @@ from torchvision.models import resnet50, ResNet50_Weights, resnet18, ResNet18_We
 class ResNetBinaryClassifier(L.LightningModule):
     def __init__(self, learning_rate=None):
         super().__init__()
-        self.resnet = resnet50(weights=ResNet50_Weights.DEFAULT)
+        self.resnet = resnet50() # weights=ResNet50_Weights.DEFAULT)
         old_fc = self.resnet.fc
         new_fc = nn.Sequential(
             nn.Linear(old_fc.in_features, 256),
@@ -46,7 +46,12 @@ class ResNetBinaryClassifier(L.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=self.learning_rate)
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate, weight_decay=1e-4)
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=3, verbose=True)
+        return {"optimizer": optimizer, "lr_scheduler": scheduler, "monitor": "val_loss"}
+
+    # def configure_optimizers(self):
+    #     return torch.optim.Adam(self.parameters(), lr=self.learning_rate)
 
     def predict_step(self, batch, batch_idx):
         x = batch

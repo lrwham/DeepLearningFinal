@@ -40,7 +40,7 @@ if __name__ == "__main__":
     #     learning_rate=0.001
     # )
     model = ResNetBinaryClassifier(
-        learning_rate=0.001,
+        learning_rate=0.1,
     )
     
     # model = torch.compile(model)
