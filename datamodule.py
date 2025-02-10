@@ -10,7 +10,7 @@ from ImageDataset import ImageDataset, InferenceImageDataset
 
 
 class DataModule(L.LightningDataModule):
-    def __init__(self, path, batch_size=16, num_workers=11, fraction=1, persistent_workers=True):
+    def __init__(self, path, batch_size=16, num_workers=11, fraction=1.0, persistent_workers=True):
         super().__init__()
         self.path = path
         self.batch_size = batch_size

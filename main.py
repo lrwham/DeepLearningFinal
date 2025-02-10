@@ -39,7 +39,7 @@ if __name__ == "__main__":
     # model = CNN_Binary_Classifier(
     #     learning_rate=0.001
     # )
-    model = CNN_Binary_Classifier(
+    model = ResNetBinaryClassifier(
         learning_rate=0.001,
     )
     
@@ -52,12 +52,14 @@ if __name__ == "__main__":
         strategy="ddp",
         precision="16-mixed",
         max_time="00:04:00:00",
-        max_epochs=10,
+        max_epochs=200,
         log_every_n_steps=10,
         callbacks=[early_stop_callback, checkpoint_callback],
         profiler="simple",
     )
 
     path = "/teamspace/studios/this_studio"
+    datamodule = DataModule(path, fraction=0.2, num_workers=10, batch_size=16, persistent_workers=True)
+
     print("About to fit! 🎸")
-    trainer.fit(model, datamodule=DataModule(path))
+    trainer.fit(model, datamodule=datamodule)
