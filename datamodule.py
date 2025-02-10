@@ -10,12 +10,13 @@ from ImageDataset import ImageDataset, InferenceImageDataset
 
 
 class DataModule(L.LightningDataModule):
-    def __init__(self, path, batch_size=16, num_workers=11, fraction=1):
+    def __init__(self, path, batch_size=16, num_workers=11, fraction=1, persistent_workers=True):
         super().__init__()
         self.path = path
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.fraction = fraction
+        self.persistent_workers = persistent_workers
 
     def setup(self, stage=None):
         import pandas as pd
@@ -95,6 +96,7 @@ class DataModule(L.LightningDataModule):
             shuffle=True,
             num_workers=self.num_workers,
             prefetch_factor=4,
+            persistent_workers=self.persistent_workers
         )
 
     def val_dataloader(self):
@@ -104,6 +106,7 @@ class DataModule(L.LightningDataModule):
             shuffle=False,
             num_workers=self.num_workers,
             prefetch_factor=4,
+            persistent_workers=self.persistent_workers
         )
 
     def predict_dataloader(self):
@@ -113,6 +116,7 @@ class DataModule(L.LightningDataModule):
             shuffle=False,
             num_workers=self.num_workers,
             prefetch_factor=4,
+            persistent_workers=self.persistent_workers,
         )
 
     def test_dataloader(self):
@@ -122,4 +126,5 @@ class DataModule(L.LightningDataModule):
             shuffle=False,
             num_workers=self.num_workers,
             prefetch_factor=4,
+            persistent_workers=self.persistent_workers,
         )
