@@ -46,7 +46,7 @@ class DataModule(L.LightningDataModule):
                 transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2),
                 transforms.Resize(int(512 * 1.2)),
                 transforms.RandomHorizontalFlip(),
-                transforms.RandomRotation(45),
+                transforms.RandomRotation(10),
                 transforms.RandomCrop((512, 512)),
                 transforms.ToTensor(),
                 transforms.Normalize(mean, std),
