@@ -11,3 +11,4 @@ cache/
 .idea/this_studio.iml
 __pycache__/
 .wget-hsts
+*.ckpt

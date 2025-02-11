@@ -1,4 +1,3 @@
-# load checkpoints/2025-02-06-23-45-epoch=10-val_loss=0.12.ckpt
 import lightning as L
 import torch
 from model import CNN_Binary_Classifier, ResNetBinaryClassifier
@@ -12,11 +11,12 @@ from datamodule import DataModule
 import datetime
 
 if __name__ == "__main__":
-    torch.set_float32_matmul_precision('high')
+    torch.set_float32_matmul_precision("high")
     path = "/teamspace/studios/this_studio"
     # load the model
     model = ResNetBinaryClassifier.load_from_checkpoint(
-"checkpoints/2025-02-10-18-12-epoch=60-val_loss=0.09.ckpt"    )
+        "checkpoints/2025-02-10-18-12-epoch=60-val_loss=0.09.ckpt"
+    )
 
     # use CPU
     trainer = L.Trainer(accelerator="gpu", devices=1)
@@ -41,7 +41,3 @@ if __name__ == "__main__":
     test_df["predictions"] = predictions
     test_df.to_csv(f"predictions-{now}.csv", index=False)
     print(f"Predictions saved to predictions-{now}.csv")
-
-
-
-
